@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Faster for Rugby</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  :root {
+    --navy: #1F3864;
+    --green: #2E7D32;
+    --green-light: #E8F3E9;
+    --grey: #667085;
+    --line: #E4E7EC;
+    --bg: #F7F8FA;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: #1A1A1A;
+    max-width: 480px;
+    margin: 0 auto;
+    padding-bottom: 90px;
+    line-height: 1.5;
+  }
+
+  /* Header */
+  header {
+    background: var(--navy);
+    color: #fff;
+    padding: 22px 20px 18px;
+    position: sticky; top: 0; z-index: 20;
+  }
+  header h1 { font-size: 20px; font-weight: 800; letter-spacing: -0.3px; }
+  header p { font-size: 13px; opacity: 0.8; margin-top: 2px; }
+
+  /* Tabs */
+  .tabs {
+    display: flex; gap: 6px;
+    padding: 12px 16px;
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+    position: sticky; top: 78px; z-index: 19;
+    overflow-x: auto;
+  }
+  .tab {
+    flex: 0 0 auto;
+    padding: 9px 14px;
+    border-radius: 999px;
+    font-size: 13px; font-weight: 700;
+    background: var(--bg); color: var(--grey);
+    border: 1.5px solid transparent;
+    cursor: pointer; white-space: nowrap;
+    transition: all 0.15s;
+  }
+  .tab.active { background: var(--green-light); color: var(--green); border-color: var(--green); }
+
+  .view { display: none; padding: 16px; }
+  .view.active { display: block; }
+
+  /* Intro card */
+  .intro {
+    background: linear-gradient(135deg, #2E7D32, #256528);
+    color: #fff; border-radius: 16px;
+    padding: 18px; margin-bottom: 16px;
+  }
+  .intro h2 { font-size: 17px; margin-bottom: 8px; }
+  .intro .rule {
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px; padding: 11px 13px;
+    font-size: 13px; margin-top: 10px;
+  }
+  .intro .rule b { display:block; font-size:11px; text-transform:uppercase; letter-spacing:0.5px; opacity:0.85; margin-bottom:2px;}
+
+  /* Progress */
+  .progress-wrap { margin-bottom: 14px; }
+  .progress-bar { height: 8px; background: var(--line); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0; background: var(--green); border-radius: 999px; transition: width 0.3s; }
+  .progress-label { font-size: 12px; color: var(--grey); margin-top: 6px; font-weight: 600; }
+
+  /* Drill card */
+  .card {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: 14px; margin-bottom: 12px;
+    overflow: hidden; transition: opacity 0.2s;
+  }
+  .card.done { opacity: 0.55; }
+  .card-head {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 16px; cursor: pointer;
+  }
+  .check {
+    flex: 0 0 26px; height: 26px; border-radius: 8px;
+    border: 2px solid var(--line); background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; color: #fff; transition: all 0.15s;
+  }
+  .card.done .check { background: var(--green); border-color: var(--green); }
+  .card-title { flex: 1; }
+  .card-title .name { font-weight: 700; font-size: 15px; }
+  .card-title .dose { font-size: 12.5px; color: var(--green); font-weight: 700; margin-top: 1px; }
+  .chevron { color: var(--grey); font-size: 13px; transition: transform 0.2s; }
+  .card.open .chevron { transform: rotate(90deg); }
+
+  .card-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.25s ease;
+    padding: 0 16px;
+  }
+  .card.open .card-body { max-height: 600px; padding-bottom: 16px; }
+  .card-body p { font-size: 13.5px; color: #333; }
+  .diagram { margin: 12px 0 4px; background: var(--green-light); border-radius: 10px; padding: 8px; }
+  .diagram svg { display: block; width: 100%; height: auto; }
+  .diagram .cap { font-size: 11px; color: var(--green); text-align: center; font-weight: 600; margin-top: 4px; }
+
+  .section-label {
+    font-size: 12px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.6px; color: var(--navy);
+    margin: 18px 4px 8px;
+  }
+  .rest-note {
+    background: #FFF8E6; border: 1px solid #F5E2A8;
+    border-radius: 10px; padding: 10px 13px;
+    font-size: 12.5px; color: #7A5C00; margin: 4px 0 14px;
+  }
+  .finish-note {
+    background: #fff; border: 1px dashed var(--line);
+    border-radius: 12px; padding: 14px 16px; font-size: 13.5px;
+  }
+  .finish-note h3 { font-size: 14px; color: var(--navy); margin-bottom: 4px; }
+
+  /* Warmup specific */
+  .warmup-link {
+    background: #fff; border: 1px solid var(--line); border-radius: 14px;
+    padding: 16px; margin-bottom: 12px;
+  }
+  .warmup-link .phase { display:flex; gap:10px; align-items:flex-start; margin-bottom:10px; }
+  .warmup-link .badge {
+    flex:0 0 auto; width: 30px; height: 30px; border-radius: 8px;
+    background: var(--navy); color:#fff; font-weight:800; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .warmup-link .phase div b { font-size:14px; }
+  .warmup-link .phase div p { font-size:12.5px; color:var(--grey); }
+  .callout {
+    background: var(--green-light); border-radius:10px; padding:12px 14px;
+    font-size:13px; margin-top:6px;
+  }
+
+  footer {
+    position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 100%; max-width: 480px;
+    background: #fff; border-top: 1px solid var(--line);
+    padding: 12px 16px; display: flex; gap: 10px;
+  }
+  .btn {
+    flex: 1; padding: 13px; border-radius: 12px; border: none;
+    font-size: 14px; font-weight: 700; cursor: pointer;
+  }
+  .btn-reset { background: var(--bg); color: var(--grey); }
+  .btn-done { background: var(--green); color: #fff; }
+  .btn-done:disabled { opacity: 0.4; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Cillian's Speed Plan</h1>
+  <p>Get faster for rugby. Two sessions a week.</p>
+</header>
+
+<div class="tabs">
+  <div class="tab active" data-view="warmup">Warm-up</div>
+  <div class="tab" data-view="s1">Session 1 · Acceleration</div>
+  <div class="tab" data-view="s2">Session 2 · Speed &amp; Feet</div>
+</div>
+
+<!-- WARM UP -->
+<div class="view active" id="warmup">
+  <div class="intro">
+    <h2>Always warm up first</h2>
+    <p style="font-size:13.5px; opacity:0.92;">Use the World Rugby <b>Activate U15</b> booklet. It's built for your age and gets you ready to move fast without pulling anything. Work through the four parts in order, about 15 minutes.</p>
+  </div>
+
+  <div class="warmup-link">
+    <div class="phase"><div class="badge">A</div><div><b>Running drills</b> · ~2 min<p>Snake run, plant &amp; cut, skips.</p></div></div>
+    <div class="phase"><div class="badge">B</div><div><b>Balance</b> · ~4 min<p>Single-leg balance and hops.</p></div></div>
+    <div class="phase"><div class="badge">C</div><div><b>Strength &amp; control</b> · ~6 min<p>Squats, bridges, Nordic hamstring, neck work.</p></div></div>
+    <div class="phase"><div class="badge">D</div><div><b>Jumps &amp; cuts</b> · ~3 min<p>Pogos, ski jumps, plant &amp; cut.</p></div></div>
+    <div class="callout">Start on <b>Phase 1 &amp; 2</b> for the first few weeks. Move to <b>Phase 3 &amp; 4</b> once they feel easy.</div>
+    <div class="rest-note" style="margin-top:12px;">Don't do the <b>Nordic Hamstring Curl</b> the day before or day of a match. Your hamstrings need to be fresh to play.</div>
+  </div>
+</div>
+
+<!-- SESSION 1 -->
+<div class="view" id="s1">
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="fill-s1"></div></div>
+    <div class="progress-label" id="label-s1">0 of 4 done</div>
+  </div>
+
+  <div class="intro" style="background:linear-gradient(135deg,#1F3864,#16284a);">
+    <h2>Acceleration</h2>
+    <p style="font-size:13.5px;opacity:0.92;">Exploding from a standstill, the most useful speed in rugby. Tap each drill to see how.</p>
+    <div class="rule"><b>Golden rule</b>Sprint fresh. When the sprints slow down, you're done.</div>
+  </div>
+
+  <div class="section-label">Main work</div>
+  <div data-session="s1"></div>
+
+  <div class="rest-note">Rest fully between every sprint. Walk back slowly, 60 to 90 seconds. No rush.</div>
+
+  <div class="finish-note">
+    <h3>Finish</h3>
+    Two relaxed run-throughs at ~80% over 30 m, feeling smooth. Then a 5-minute easy jog &amp; walk to cool down.
+  </div>
+</div>
+
+<!-- SESSION 2 -->
+<div class="view" id="s2">
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="fill-s2"></div></div>
+    <div class="progress-label" id="label-s2">0 of 5 done</div>
+  </div>
+
+  <div class="intro" style="background:linear-gradient(135deg,#1F3864,#16284a);">
+    <h2>Top speed &amp; footwork</h2>
+    <p style="font-size:13.5px;opacity:0.92;">First pure running speed, then the quick feet to beat a defender.</p>
+    <div class="rule"><b>Golden rule</b>Be fresh for the speed work. Quality beats quantity.</div>
+  </div>
+
+  <div class="section-label">Part 1 · Running speed</div>
+  <div data-session="s2a"></div>
+  <div class="rest-note">Full recovery between runs. Walk back, 90 seconds or more.</div>
+
+  <div class="section-label">Part 2 · Footwork &amp; stepping</div>
+  <div data-session="s2b"></div>
+
+  <div class="finish-note">
+    <h3>Finish</h3>
+    One or two easy run-throughs to feel smooth, then a 5-minute easy jog &amp; walk to cool down.
+  </div>
+</div>
+
+<footer>
+  <button class="btn btn-reset" id="resetBtn">Reset ticks</button>
+  <button class="btn btn-done" id="doneBtn">Session done 🎉</button>
+</footer>
+
+<script>
+// ---- Diagrams (simple SVG cone layouts) ----
+const dist = (label) => `<svg viewBox="0 0 300 70"><line x1="20" y1="35" x2="280" y2="35" stroke="#2E7D32" stroke-width="2" stroke-dasharray="6 5"/><circle cx="20" cy="35" r="7" fill="#2E7D32"/><circle cx="280" cy="35" r="7" fill="#1F3864"/><text x="150" y="25" text-anchor="middle" font-size="13" fill="#1F3864" font-weight="700">${label}</text><polygon points="270,30 285,35 270,40" fill="#1F3864"/></svg>`;
+const zigzag = `<svg viewBox="0 0 300 110"><polyline points="30,90 110,25 190,90 270,25" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="6 5"/><circle cx="30" cy="90" r="7" fill="#2E7D32"/><circle cx="110" cy="25" r="7" fill="#1F3864"/><circle cx="190" cy="90" r="7" fill="#1F3864"/><circle cx="270" cy="25" r="7" fill="#1F3864"/><text x="150" y="105" text-anchor="middle" font-size="11" fill="#2E7D32" font-weight="600">~5 m between cones</text></svg>`;
+const ladder = `<svg viewBox="0 0 300 50">${[40,80,120,160,200,240].map(x=>`<circle cx="${x}" cy="25" r="6" fill="#2E7D32"/>`).join('')}<text x="150" y="48" text-anchor="middle" font-size="11" fill="#2E7D32" font-weight="600">6 cones, ~1 foot apart</text></svg>`;
+const mirror = `<svg viewBox="0 0 300 90"><path d="M30,75 L70,75 L70,35 L120,35 L120,75 L170,75 L170,35 L220,35" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="6 5"/><circle cx="30" cy="75" r="7" fill="#2E7D32"/><text x="150" y="88" text-anchor="middle" font-size="11" fill="#2E7D32" font-weight="600">sprint → step → sprint → step</text></svg>`;
+
+// ---- Drill data ----
+const drills = {
+  s1: [
+    {name:"Wall drive holds", dose:"3 each leg", body:"Lean against a wall or fence at an angle, arms straight. Drive one knee up and hold 3 seconds. Teaches the body position you want when accelerating. Swap legs."},
+    {name:"March then run", dose:"4 runs", body:"Over 20 m: march tall driving the knees up for the first 10 m, then smoothly speed into a run for the last 10 m. Drive the knees, pump the arms.", diag:dist("20 m"), cap:"march 10 m → run 10 m"},
+    {name:"Push-up start sprints", dose:"4 sprints", body:"Lie face down. Pop up and sprint hard for 15 m. Starting low forces you to drive forward, not stand straight up.", diag:dist("15 m"), cap:"from the ground → sprint"},
+    {name:"Falling start sprints", dose:"4 sprints", body:"Stand tall, lean forward until you have to catch yourself, then sprint 20 m. Teaches a powerful forward lean.", diag:dist("20 m"), cap:"lean → fall → sprint"},
+  ],
+  s2a: [
+    {name:"Build-up runs", dose:"3 runs", body:"Over 40 m: start easy, gradually build to nearly full speed by the end, then ease off. Stay tall and relaxed, do not strain.", diag:dist("40 m"), cap:"easy → fast → ease off"},
+    {name:"Flying sprints", dose:"4 sprints", body:"Jog 10 m to build up, then sprint at FULL speed for 20 m, then ease down. Because you're already moving you hit a higher top speed safely.", diag:dist("10 m jog + 20 m sprint"), cap:"roll in → full speed → out"},
+  ],
+  s2b: [
+    {name:"Ladder feet (cones)", dose:"4 runs", body:"Lay 6 cones in a line, a foot apart. Run through with quick small steps, two feet between each cone. Quick and light, like the ground is hot.", diag:ladder, cap:"quick feet"},
+    {name:"Z-run", dose:"4 runs", body:"Set 4 cones in a zig-zag, ~5 m apart. Sprint to each, plant the outside foot and cut sharply to the next. Stay low through the turn.", diag:zigzag, cap:"sprint & cut"},
+    {name:"Mirror steps (solo)", dose:"4 runs", body:"Imagine a defender. Sprint 5 m, sharp side-step left, sprint again, side-step right. Sell the step, drop your hips and push hard off the outside foot.", diag:mirror, cap:"step like you mean it"},
+  ],
+};
+
+const state = {}; // track ticks
+
+function buildDrill(key, idx, d) {
+  const id = key + "-" + idx;
+  state[id] = false;
+  const el = document.createElement("div");
+  el.className = "card";
+  el.innerHTML = `
+    <div class="card-head">
+      <div class="check">✓</div>
+      <div class="card-title"><div class="name">${d.name}</div><div class="dose">${d.dose}</div></div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="card-body">
+      <p>${d.body}</p>
+      ${d.diag ? `<div class="diagram">${d.diag}<div class="cap">${d.cap||""}</div></div>` : ""}
+    </div>`;
+  const head = el.querySelector(".card-head");
+  const check = el.querySelector(".check");
+  head.addEventListener("click", (e) => {
+    if (e.target === check || check.contains(e.target)) return;
+    el.classList.toggle("open");
+  });
+  check.addEventListener("click", (e) => {
+    e.stopPropagation();
+    state[id] = !state[id];
+    el.classList.toggle("done", state[id]);
+    updateProgress();
+  });
+  return el;
+}
+
+Object.keys(drills).forEach(key => {
+  const container = document.querySelector(`[data-session="${key}"]`);
+  drills[key].forEach((d, i) => container.appendChild(buildDrill(key, i, d)));
+});
+
+function updateProgress() {
+  const groups = { "s1": ["s1"], "s2": ["s2a","s2b"] };
+  Object.entries(groups).forEach(([view, keys]) => {
+    let total = 0, done = 0;
+    keys.forEach(k => drills[k].forEach((_, i) => { total++; if (state[k+"-"+i]) done++; }));
+    const fill = document.getElementById("fill-"+view);
+    const label = document.getElementById("label-"+view);
+    if (fill) fill.style.width = (done/total*100) + "%";
+    if (label) label.textContent = `${done} of ${total} done`;
+  });
+}
+updateProgress();
+
+// Tabs
+document.querySelectorAll(".tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+    tab.classList.add("active");
+    document.getElementById(tab.dataset.view).classList.add("active");
+    window.scrollTo(0,0);
+  });
+});
+
+// Reset / done
+document.getElementById("resetBtn").addEventListener("click", () => {
+  Object.keys(state).forEach(k => state[k] = false);
+  document.querySelectorAll(".card").forEach(c => c.classList.remove("done"));
+  updateProgress();
+});
+document.getElementById("doneBtn").addEventListener("click", () => {
+  alert("Nice work, Cillian. Rest up and see you next session. 💪");
+});
+</script>
+</body>
+</html>
