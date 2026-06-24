@@ -147,6 +147,22 @@
     font-size:13px; margin-top:6px;
   }
 
+  /* Activate booklet link */
+  .doc-card {
+    display:flex; align-items:center; gap:12px;
+    background:#fff; border:1px solid var(--line); border-radius:14px;
+    padding:14px 16px; margin-bottom:12px;
+    text-decoration:none; color:inherit;
+  }
+  .doc-card .ic {
+    flex:0 0 44px; height:44px; border-radius:10px;
+    background:#FDECEA; color:#C62828; font-weight:800; font-size:12px;
+    display:flex; align-items:center; justify-content:center; letter-spacing:0.5px;
+  }
+  .doc-card .meta b { font-size:14.5px; color:#1A1A1A; display:block; }
+  .doc-card .meta span { font-size:12px; color:var(--grey); }
+  .doc-card .go { margin-left:auto; color:var(--green); font-weight:800; font-size:20px; }
+
   footer {
     position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
     width: 100%; max-width: 480px;
@@ -180,6 +196,12 @@
     <h2>Always warm up first</h2>
     <p style="font-size:13.5px; opacity:0.92;">Use the World Rugby <b>Activate U15</b> booklet, then add the sprint drills below. About 15 minutes in total. It gets you ready to move fast without pulling anything.</p>
   </div>
+
+  <a class="doc-card" href="activate-u15.pdf" target="_blank" rel="noopener">
+    <div class="ic">PDF</div>
+    <div class="meta"><b>Open the Activate booklet</b><span>World Rugby Activate U15, with a photo of every exercise</span></div>
+    <div class="go">›</div>
+  </a>
 
   <div class="warmup-link">
     <div class="phase"><div class="badge">A</div><div><b>Running drills</b> · ~2 min<p>Snake run, plant &amp; cut, skips.</p></div></div>
