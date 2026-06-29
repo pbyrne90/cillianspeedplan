@@ -7,7 +7,16 @@
       "video": "",
       "diag": "askip",
       "diagLabel": "",
-      "cap": "knee up, arms drive"
+      "cap": "head up, knees up, arms drive"
+    },
+    {
+      "name": "B-skip",
+      "dose": "2 x 20m",
+      "body": "builds on the basic A-skip but adds an exaggerated \"pawing\" leg cycle. To execute it, you hop forward, drive your knee up, kick the lower leg out, and actively snap your foot back down beneath your hips",
+      "video": "",
+      "diag": "",
+      "diagLabel": "",
+      "cap": ""
     },
     {
       "name": "High knees",
@@ -89,8 +98,8 @@
   "s2b": [
     {
       "name": "Ladder feet (cones)",
-      "dose": "4 runs",
-      "body": "Lay 6 cones in a line, a foot apart. Run through with quick small steps, two feet between each cone. Quick and light, like the ground is hot.",
+      "dose": "4 -5 reps",
+      "body": "Put 6 cones in a line, a foot apart. Run through with quick small steps, two feet between each cone. Quick and light, like the ground is hot.",
       "video": "",
       "diag": "ladder",
       "diagLabel": "",
