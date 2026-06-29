@@ -1,31 +1,147 @@
 {
   "warmup": [
-    {"name":"A-skip","dose":"2 × 20 m","body":"A bouncy skip where you drive one knee up to hip height while the opposite arm comes up. Stay light and springy on your toes.","video":"","diag":"askip","diagLabel":"","cap":"knee up, arms drive"},
-    {"name":"High knees","dose":"2 × 20 m","body":"Quick steps on your toes, driving the knees up high and fast. Stay tall and pump the arms to match the legs.","video":"","diag":"highknees","diagLabel":"","cap":"tall, quick knees"},
-    {"name":"Build-up strides","dose":"3 × 30 m","body":"Over 30 m, start easy and smoothly build to about 90 percent by the end, then ease off. Now you're ready to sprint.","video":"","diag":"buildup","diagLabel":"","cap":"easy → fast → ease off"}
+    {
+      "name": "A-skip",
+      "dose": "2 × 20 m",
+      "body": "A bouncy skip where you drive one knee up to hip height while the opposite arm comes up. Stay light and springy on your toes.",
+      "video": "",
+      "diag": "askip",
+      "diagLabel": "",
+      "cap": "knee up, arms drive"
+    },
+    {
+      "name": "High knees",
+      "dose": "2 × 20 m",
+      "body": "Quick steps on your toes, driving the knees up high and fast. Stay tall and pump the arms to match the legs.",
+      "video": "",
+      "diag": "highknees",
+      "diagLabel": "",
+      "cap": "tall, quick knees"
+    },
+    {
+      "name": "Build-up strides",
+      "dose": "3 × 30 m",
+      "body": "Over 30 m, start easy and smoothly build to about 90 percent by the end, then ease off. Now you're ready to sprint.",
+      "video": "",
+      "diag": "buildup",
+      "diagLabel": "",
+      "cap": "easy → fast → ease off"
+    }
   ],
   "s1": [
-    {"name":"Wall drive holds","dose":"3 each leg","body":"Lean against a wall or fence at an angle, arms straight. Drive one knee up and hold 3 seconds. Teaches the body position you want when accelerating. Swap legs.","video":"","diag":"","diagLabel":"","cap":""},
-    {"name":"March then run","dose":"4 runs","body":"Over 20 m: march tall driving the knees up for the first 10 m, then smoothly speed into a run for the last 10 m. Drive the knees, pump the arms.","video":"","diag":"dist","diagLabel":"20 m","cap":"march 10 m → run 10 m"},
-    {"name":"Push-up start sprints","dose":"4 sprints","body":"Lie face down. Pop up and sprint hard for 15 m. Starting low forces you to drive forward, not stand straight up.","video":"","diag":"dist","diagLabel":"15 m","cap":"from the ground → sprint"},
-    {"name":"Falling start sprints","dose":"4 sprints","body":"Stand tall, lean forward until you have to catch yourself, then sprint 20 m. Teaches a powerful forward lean.","video":"","diag":"dist","diagLabel":"20 m","cap":"lean → fall → sprint"}
+    {
+      "name": "Wall drive holds",
+      "dose": "3 each leg",
+      "body": "Lean against a wall or fence at an angle, arms straight. Drive one knee up and hold 3 seconds. Teaches the body position you want when accelerating. Swap legs.",
+      "video": "",
+      "diag": "",
+      "diagLabel": "",
+      "cap": ""
+    },
+    {
+      "name": "March then run",
+      "dose": "4 runs",
+      "body": "Over 20 m: march tall driving the knees up for the first 10 m, then smoothly speed into a run for the last 10 m. Drive the knees, pump the arms.",
+      "video": "",
+      "diag": "dist",
+      "diagLabel": "20 m",
+      "cap": "march 10 m → run 10 m"
+    },
+    {
+      "name": "Push-up start sprints",
+      "dose": "4 sprints",
+      "body": "Lie face down. Pop up and sprint hard for 15 m. Starting low forces you to drive forward, not stand straight up.",
+      "video": "",
+      "diag": "dist",
+      "diagLabel": "15 m",
+      "cap": "from the ground → sprint"
+    },
+    {
+      "name": "Falling start sprints",
+      "dose": "4 sprints",
+      "body": "Stand tall, lean forward until you have to catch yourself, then sprint 20 m. Teaches a powerful forward lean.",
+      "video": "",
+      "diag": "dist",
+      "diagLabel": "20 m",
+      "cap": "lean → fall → sprint"
+    }
   ],
   "s2a": [
-    {"name":"Build-up runs","dose":"3 runs","body":"Over 40 m: start easy, gradually build to nearly full speed by the end, then ease off. Stay tall and relaxed, do not strain.","video":"","diag":"dist","diagLabel":"40 m","cap":"easy → fast → ease off"},
-    {"name":"Flying sprints","dose":"4 sprints","body":"Jog 10 m to build up, then sprint at FULL speed for 20 m, then ease down. Because you're already moving you hit a higher top speed safely.","video":"","diag":"dist","diagLabel":"10 m jog + 20 m sprint","cap":"roll in → full speed → out"}
+    {
+      "name": "Build-up runs",
+      "dose": "3 runs",
+      "body": "Over 40 m: start easy, gradually build to nearly full speed by the end, then ease off. Stay tall and relaxed, do not strain.",
+      "video": "",
+      "diag": "dist",
+      "diagLabel": "40 m",
+      "cap": "easy → fast → ease off"
+    },
+    {
+      "name": "Flying sprints",
+      "dose": "4 sprints",
+      "body": "Jog 10 m to build up, then sprint at FULL speed for 20 m, then ease down. Because you're already moving you hit a higher top speed safely.",
+      "video": "",
+      "diag": "dist",
+      "diagLabel": "10 m jog + 20 m sprint",
+      "cap": "roll in → full speed → out"
+    }
   ],
   "s2b": [
-    {"name":"Ladder feet (cones)","dose":"4 runs","body":"Lay 6 cones in a line, a foot apart. Run through with quick small steps, two feet between each cone. Quick and light, like the ground is hot.","video":"","diag":"ladder","diagLabel":"","cap":"quick feet"},
-    {"name":"Z-run","dose":"4 runs","body":"Set 4 cones in a zig-zag, ~5 m apart. Sprint to each, plant the outside foot and cut sharply to the next. Stay low through the turn.","video":"","diag":"zigzag","diagLabel":"","cap":"sprint & cut"},
-    {"name":"Mirror steps (solo)","dose":"4 runs","body":"Imagine a defender. Sprint 5 m, sharp side-step left, sprint again, side-step right. Sell the step, drop your hips and push hard off the outside foot.","video":"","diag":"mirror","diagLabel":"","cap":"step like you mean it"}
+    {
+      "name": "Ladder feet (cones)",
+      "dose": "4 runs",
+      "body": "Lay 6 cones in a line, a foot apart. Run through with quick small steps, two feet between each cone. Quick and light, like the ground is hot.",
+      "video": "",
+      "diag": "ladder",
+      "diagLabel": "",
+      "cap": "quick feet"
+    },
+    {
+      "name": "Z-run",
+      "dose": "4 runs",
+      "body": "Set 4 cones in a zig-zag, ~5 m apart. Sprint to each, plant the outside foot and cut sharply to the next. Stay low through the turn.",
+      "video": "",
+      "diag": "zigzag",
+      "diagLabel": "",
+      "cap": "sprint & cut"
+    },
+    {
+      "name": "Mirror steps (solo)",
+      "dose": "4 runs",
+      "body": "Imagine a defender. Sprint 5 m, sharp side-step left, sprint again, side-step right. Sell the step, drop your hips and push hard off the outside foot.",
+      "video": "",
+      "diag": "mirror",
+      "diagLabel": "",
+      "cap": "step like you mean it"
+    }
   ],
   "activate": {
     "phases": [
-      {"badge":"A","title":"Running drills","time":"~2 min","detail":"Snake run, plant & cut, skips."},
-      {"badge":"B","title":"Balance","time":"~4 min","detail":"Single-leg balance and hops."},
-      {"badge":"C","title":"Strength & control","time":"~6 min","detail":"Squats, bridges, neck work."},
-      {"badge":"D","title":"Jumps & cuts","time":"~3 min","detail":"Pogos, ski jumps, plant & cut."}
+      {
+        "badge": "A",
+        "title": "Running drills",
+        "time": "~2 min",
+        "detail": "Snake run, plant & cut, skips."
+      },
+      {
+        "badge": "B",
+        "title": "Balance",
+        "time": "~4 min",
+        "detail": "Single-leg balance and hops."
+      },
+      {
+        "badge": "C",
+        "title": "Strength & control",
+        "time": "~6 min",
+        "detail": "Squats, bridges, neck work."
+      },
+      {
+        "badge": "D",
+        "title": "Jumps & cuts",
+        "time": "~3 min",
+        "detail": "Pogos, ski jumps, plant & cut."
+      }
     ],
-    "callout": "Start on Phase 1 & 2 for the first few weeks. Move to Phase 3 & 4 once they feel easy."
+    "callout": "Start on World Rugby Document Phase 1 & 2 for the first few weeks."
   }
 }
