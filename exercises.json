@@ -77,15 +77,6 @@
   ],
   "s2a": [
     {
-      "name": "Build-up runs",
-      "dose": "3 runs",
-      "body": "Over 40 m: start easy, gradually build to nearly full speed by the end, then ease off. Stay tall and relaxed, do not strain.",
-      "video": "",
-      "diag": "dist",
-      "diagLabel": "40 m",
-      "cap": "easy → fast → ease off"
-    },
-    {
       "name": "Flying sprints",
       "dose": "4 sprints",
       "body": "Jog 10 m to build up, then sprint at FULL speed for 20 m, then ease down. Because you're already moving you hit a higher top speed safely.",
