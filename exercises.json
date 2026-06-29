@@ -21,7 +21,7 @@
     {
       "name": "Build-up strides",
       "dose": "3 × 30 m",
-      "body": "Over 30 m, start easy and smoothly build to about 90 percent by the end, then ease off. Now you're ready to sprint.",
+      "body": "Over 30 m, start easy and smoothly build to about 90 percent by the end, then ease off. Get's you ready to sprint hard.",
       "video": "",
       "diag": "buildup",
       "diagLabel": "",
@@ -39,17 +39,17 @@
       "cap": ""
     },
     {
-      "name": "March then run",
-      "dose": "4 runs",
-      "body": "Over 20 m: march tall driving the knees up for the first 10 m, then smoothly speed into a run for the last 10 m. Drive the knees, pump the arms.",
+      "name": "High Knees to Run",
+      "dose": "4 runs over 20m",
+      "body": "High knees for the first 10 m, then smoothly speed into a run for the last 10 m. Drive the knees, pump the arms.",
       "video": "",
       "diag": "dist",
       "diagLabel": "20 m",
-      "cap": "march 10 m → run 10 m"
+      "cap": "High Knees 10 m → Run 10 m"
     },
     {
       "name": "Push-up start sprints",
-      "dose": "4 sprints",
+      "dose": "4 reps",
       "body": "Lie face down. Pop up and sprint hard for 15 m. Starting low forces you to drive forward, not stand straight up.",
       "video": "",
       "diag": "dist",
@@ -58,8 +58,8 @@
     },
     {
       "name": "Falling start sprints",
-      "dose": "4 sprints",
-      "body": "Stand tall, lean forward until you have to catch yourself, then sprint 20 m. Teaches a powerful forward lean.",
+      "dose": "4 reps (2mins between runs)",
+      "body": "Stand tall, lean forward until you have to catch yourself, then sprint 20 m. Push the ground away HARD with your first 5 steps.",
       "video": "",
       "diag": "dist",
       "diagLabel": "20 m",
