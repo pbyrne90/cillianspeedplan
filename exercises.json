@@ -18,5 +18,14 @@
     {"name":"Ladder feet (cones)","dose":"4 runs","body":"Lay 6 cones in a line, a foot apart. Run through with quick small steps, two feet between each cone. Quick and light, like the ground is hot.","video":"","diag":"ladder","diagLabel":"","cap":"quick feet"},
     {"name":"Z-run","dose":"4 runs","body":"Set 4 cones in a zig-zag, ~5 m apart. Sprint to each, plant the outside foot and cut sharply to the next. Stay low through the turn.","video":"","diag":"zigzag","diagLabel":"","cap":"sprint & cut"},
     {"name":"Mirror steps (solo)","dose":"4 runs","body":"Imagine a defender. Sprint 5 m, sharp side-step left, sprint again, side-step right. Sell the step, drop your hips and push hard off the outside foot.","video":"","diag":"mirror","diagLabel":"","cap":"step like you mean it"}
-  ]
+  ],
+  "activate": {
+    "phases": [
+      {"badge":"A","title":"Running drills","time":"~2 min","detail":"Snake run, plant & cut, skips."},
+      {"badge":"B","title":"Balance","time":"~4 min","detail":"Single-leg balance and hops."},
+      {"badge":"C","title":"Strength & control","time":"~6 min","detail":"Squats, bridges, neck work."},
+      {"badge":"D","title":"Jumps & cuts","time":"~3 min","detail":"Pogos, ski jumps, plant & cut."}
+    ],
+    "callout": "Start on Phase 1 & 2 for the first few weeks. Move to Phase 3 & 4 once they feel easy."
+  }
 }

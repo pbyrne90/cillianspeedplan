@@ -254,6 +254,14 @@
   .cx-form .row2 > div { flex: 1; }
   .cx-form .save { width: 100%; background: var(--navy); color: #fff; border: none; border-radius: 9px; padding: 11px; font-size: 14px; font-weight: 700; cursor: pointer; }
 
+  .ph-edit { border: 1px solid var(--line); border-radius: 10px; padding: 10px; margin-bottom: 10px; }
+  .ph-top { display: flex; gap: 6px; align-items: center; margin-bottom: 8px; }
+  .ph-top .ph-badge { width: 46px; text-align: center; margin-bottom: 0 !important; }
+  .ph-top .ph-title { flex: 1; margin-bottom: 0 !important; }
+  .ph-top button { background: none; border: none; cursor: pointer; font-size: 15px; padding: 4px; color: var(--grey); }
+  .ph-top .ph-del { color: #C62828; }
+  .ph-edit input:last-child { margin-bottom: 0; }
+
   .cx-pub { margin-top: 16px; }
   .cx-pub .publish { width: 100%; background: var(--green); color: #fff; border: none; border-radius: 12px; padding: 14px; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
   .cx-pub .download { width: 100%; margin-top: 10px; background: #fff; color: var(--navy); border: 1px solid var(--line); border-radius: 12px; padding: 12px; font-size: 13.5px; font-weight: 700; cursor: pointer; }
@@ -303,13 +311,7 @@
     <div class="go">›</div>
   </a>
 
-  <div class="warmup-link">
-    <div class="phase"><div class="badge">A</div><div><b>Running drills</b> · ~2 min<p>Snake run, plant &amp; cut, skips.</p></div></div>
-    <div class="phase"><div class="badge">B</div><div><b>Balance</b> · ~4 min<p>Single-leg balance and hops.</p></div></div>
-    <div class="phase"><div class="badge">C</div><div><b>Strength &amp; control</b> · ~6 min<p>Squats, bridges, neck work.</p></div></div>
-    <div class="phase"><div class="badge">D</div><div><b>Jumps &amp; cuts</b> · ~3 min<p>Pogos, ski jumps, plant &amp; cut.</p></div></div>
-    <div class="callout">Start on <b>Phase 1 &amp; 2</b> for the first few weeks. Move to <b>Phase 3 &amp; 4</b> once they feel easy.</div>
-  </div>
+  <div class="warmup-link" id="activateBox"></div>
 
   <div class="section-label">Sprint warm-up drills</div>
   <div data-group="warmup"></div>
@@ -370,7 +372,8 @@
   </div>
   <div class="coach-body">
     <div class="cx-sel" id="cxSel">
-      <div class="p on" data-g="warmup">Warm-up</div>
+      <div class="p on" data-g="warmup">Warm-up drills</div>
+      <div class="p" data-g="activate">Warm-up phases</div>
       <div class="p" data-g="s1">Session 1</div>
       <div class="p" data-g="s2a">Session 2 · running</div>
       <div class="p" data-g="s2b">Session 2 · footwork</div>
@@ -412,6 +415,8 @@
       <input id="fCap" type="text" placeholder="e.g. march 10 m → run 10 m">
       <button class="save" id="cxSave">Save exercise</button>
     </div>
+
+    <div id="cxActivate" style="display:none;"></div>
 
     <div class="cx-pub">
       <button class="publish" id="cxPublish">
@@ -507,13 +512,28 @@ const DEFAULTS = {
     {name:"Ladder feet (cones)", dose:"4 runs", body:"Lay 6 cones in a line, a foot apart. Run through with quick small steps, two feet between each cone. Quick and light, like the ground is hot.", video:"", diag:"ladder", diagLabel:"", cap:"quick feet"},
     {name:"Z-run", dose:"4 runs", body:"Set 4 cones in a zig-zag, ~5 m apart. Sprint to each, plant the outside foot and cut sharply to the next. Stay low through the turn.", video:"", diag:"zigzag", diagLabel:"", cap:"sprint & cut"},
     {name:"Mirror steps (solo)", dose:"4 runs", body:"Imagine a defender. Sprint 5 m, sharp side-step left, sprint again, side-step right. Sell the step, drop your hips and push hard off the outside foot.", video:"", diag:"mirror", diagLabel:"", cap:"step like you mean it"}
-  ]
+  ],
+  activate: {
+    phases: [
+      {badge:"A", title:"Running drills", time:"~2 min", detail:"Snake run, plant & cut, skips."},
+      {badge:"B", title:"Balance", time:"~4 min", detail:"Single-leg balance and hops."},
+      {badge:"C", title:"Strength & control", time:"~6 min", detail:"Squats, bridges, neck work."},
+      {badge:"D", title:"Jumps & cuts", time:"~3 min", detail:"Pogos, ski jumps, plant & cut."}
+    ],
+    callout: "Start on Phase 1 & 2 for the first few weeks. Move to Phase 3 & 4 once they feel easy."
+  }
 };
 const GROUPS = ["warmup","s1","s2a","s2b"];
 const clone = (o) => JSON.parse(JSON.stringify(o));
 function normalise(d){
   const out = clone(DEFAULTS);
   GROUPS.forEach(g => { if (Array.isArray(d[g])) out[g] = d[g].map(x => Object.assign({name:"",dose:"",body:"",video:"",diag:"",diagLabel:"",cap:""}, x)); });
+  if (d.activate) {
+    out.activate = {
+      phases: Array.isArray(d.activate.phases) ? d.activate.phases.map(p => Object.assign({badge:"",title:"",time:"",detail:""}, p)) : out.activate.phases,
+      callout: typeof d.activate.callout === "string" ? d.activate.callout : out.activate.callout
+    };
+  }
   return out;
 }
 
@@ -535,7 +555,18 @@ function renderPlan(){
     box.innerHTML = "";
     model[g].forEach((ex, i) => box.appendChild(buildCard(g, i, ex)));
   });
+  renderActivate(model);
   updateProgress();
+}
+function renderActivate(model){
+  const box = document.getElementById("activateBox");
+  if (!box) return;
+  const a = (model && model.activate) || DEFAULTS.activate;
+  let html = a.phases.map(p =>
+    `<div class="phase"><div class="badge">${esc(p.badge)}</div><div><b>${esc(p.title)}</b>${p.time ? " · " + esc(p.time) : ""}<p>${esc(p.detail)}</p></div></div>`
+  ).join("");
+  if (a.callout && a.callout.trim()) html += `<div class="callout">${esc(a.callout).replace(/\n/g,"<br>")}</div>`;
+  box.innerHTML = html;
 }
 function buildCard(group, idx, ex){
   const id = group + "-" + idx;
@@ -653,7 +684,58 @@ function selectGroup(g){
   curGroup = g; editIndex = -1;
   document.querySelectorAll("#cxSel .p").forEach(p => p.classList.toggle("on", p.dataset.g === g));
   document.getElementById("cxForm").style.display = "none";
-  renderCoachList();
+  const isAct = (g === "activate");
+  document.getElementById("cxList").style.display = isAct ? "none" : "block";
+  document.getElementById("cxAdd").style.display = isAct ? "none" : "block";
+  document.getElementById("cxActivate").style.display = isAct ? "block" : "none";
+  if (isAct) renderActivateEditor(); else renderCoachList();
+}
+function renderActivateEditor(){
+  const a = DRAFT.activate;
+  const box = document.getElementById("cxActivate");
+  let html = `<div class="cx-form"><div class="hd">Warm-up phases</div>`;
+  a.phases.forEach((p, i) => {
+    html += `<div class="ph-edit" data-i="${i}">
+      <div class="ph-top">
+        <input class="ph-badge" value="${esc(p.badge)}" placeholder="A" maxlength="2">
+        <input class="ph-title" value="${esc(p.title)}" placeholder="Title">
+        <button class="ph-up" title="Move up">↑</button>
+        <button class="ph-dn" title="Move down">↓</button>
+        <button class="ph-del" title="Delete">🗑</button>
+      </div>
+      <input class="ph-time" value="${esc(p.time)}" placeholder="Time, e.g. ~2 min">
+      <input class="ph-detail" value="${esc(p.detail)}" placeholder="Details">
+    </div>`;
+  });
+  html += `<button class="cx-add" id="phAdd">+ Add phase</button>`;
+  html += `<div class="hd" style="margin-top:18px;">Green note (your comments)</div>
+    <textarea id="phCallout" placeholder="Add a note for Cillian here">${esc(a.callout)}</textarea></div>`;
+  box.innerHTML = html;
+  box.querySelectorAll(".ph-edit").forEach(row => {
+    const i = +row.dataset.i;
+    row.querySelector(".ph-badge").addEventListener("input", e => { a.phases[i].badge = e.target.value; saveDraft(); });
+    row.querySelector(".ph-title").addEventListener("input", e => { a.phases[i].title = e.target.value; saveDraft(); });
+    row.querySelector(".ph-time").addEventListener("input", e => { a.phases[i].time = e.target.value; saveDraft(); });
+    row.querySelector(".ph-detail").addEventListener("input", e => { a.phases[i].detail = e.target.value; saveDraft(); });
+    row.querySelector(".ph-up").addEventListener("click", () => movePhase(i, -1));
+    row.querySelector(".ph-dn").addEventListener("click", () => movePhase(i, 1));
+    row.querySelector(".ph-del").addEventListener("click", () => {
+      if (!confirm("Delete this phase?")) return;
+      a.phases.splice(i, 1); saveDraft(); renderActivateEditor();
+    });
+  });
+  box.querySelector("#phAdd").addEventListener("click", () => {
+    a.phases.push({badge:"", title:"", time:"", detail:""});
+    saveDraft(); renderActivateEditor();
+  });
+  box.querySelector("#phCallout").addEventListener("input", e => { a.callout = e.target.value; saveDraft(); });
+}
+function movePhase(i, dir){
+  const a = DRAFT.activate.phases;
+  const j = i + dir;
+  if (j < 0 || j >= a.length) return;
+  [a[i], a[j]] = [a[j], a[i]];
+  saveDraft(); renderActivateEditor();
 }
 function renderCoachList(){
   const list = document.getElementById("cxList");
